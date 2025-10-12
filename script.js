@@ -25,10 +25,17 @@ async function fetchItemMappingOnce() {
 function calculateArmorProfit(set) {
     let totalCost = set.items.reduce((s, i) => s + (latestData.data?.[i.id]?.low || 0), 0);
     const sellPrice = latestData.data?.[set.setId]?.high || 0;
-    const profit = Math.round(sellPrice * 0.98 - totalCost); // 2% tax included
+
+    // --- Tax capped at 5,000,000 ---
+    const rawTax = sellPrice * 0.02;
+    const tax = Math.min(rawTax, 5_000_000);
+
+    const profit = Math.round(sellPrice - tax - totalCost);
     const roi = totalCost ? ((profit / totalCost) * 100).toFixed(2) : 0;
+
     return { profit, totalCost, roi };
 }
+
 
 // --- Apply F2P Filter ---
 function applyF2PFilter(onlyF2P) {
@@ -129,13 +136,19 @@ function updateArmorPrices() {
 
         const profitElem = document.getElementById(`armor-profit-${i}`);
         if (profitElem) {
-            const profit = Math.round(setPrice * 0.98 - totalCost);
-            const roi = totalCost ? ((profit / totalCost) * 100).toFixed(2) : 0;
-            profitElem.innerHTML = `
-                <div><strong>Profit per set (after tax):</strong> ${profit ? formatNum(profit) + " gp" : "—"}</div>
-                <div><strong>ROI:</strong> ${profit ? roi + "%" : "—"}</div>
-            `;
-        }
+    // --- Apply 2% tax capped at 5m ---
+    const rawTax = setPrice * 0.02;
+    const tax = Math.min(rawTax, 5_000_000);
+
+    const profit = Math.round(setPrice - tax - totalCost);
+    const roi = totalCost ? ((profit / totalCost) * 100).toFixed(2) : 0;
+
+    profitElem.innerHTML = `
+        <div><strong>Profit per set (after tax):</strong> ${profit ? formatNum(profit) + " gp" : "—"}</div>
+        <div><strong>ROI:</strong> ${profit ? roi + "%" : "—"}</div>
+    `;
+}
+
     });
 
     const savedFilter = localStorage.getItem("f2pFilter") === "true";
