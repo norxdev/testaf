@@ -227,10 +227,9 @@ button:focus-visible, a:focus-visible {
 /* --- Sort Indicator in Headers --- */
 .summary-table th .sort-indicator {
     display: inline-block;
-    width: 1ch; /* reserve space for arrow */
+    width: 1ch;
     text-align: right;
 }
-
 
 .summary-table th, .summary-table td {
   padding: 10px 12px;
@@ -308,14 +307,13 @@ button:focus-visible, a:focus-visible {
 
 /* --- Animations --- */
 @keyframes spin180 { from { transform: rotate(0deg); } to { transform: rotate(180deg); } }
-@keyframes bounceUp {
-  0% { transform: translateY(0); }
-  30% { transform: translateY(-15px); }
-  60% { transform: translateY(0); }
-  100% { transform: translateY(0); }
-}
+@keyframes bounceUp { 0% { transform: translateY(0); } 30% { transform: translateY(-15px); } 60% { transform: translateY(0); } 100% { transform: translateY(0); } }
 .spin-icon { animation: spin180 0.5s linear; }
 .bounce-icon { animation: bounceUp 0.4s ease; }
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.spinner { border: 6px solid #f3f3f3; border-top: 6px solid var(--accent); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto; }
+
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 800px) {
@@ -364,12 +362,8 @@ button:focus-visible, a:focus-visible {
   font-size: 1rem;
 }
 
-.feedback-form textarea {
-  min-height: 120px;
-  resize: none;
-}
+.feedback-form textarea { min-height: 120px; resize: none; }
 
-/* Buttons */
 .submit-btn {
   padding: 12px;
   border: none;
@@ -394,22 +388,4 @@ button:focus-visible, a:focus-visible {
   font-weight: bold;
 }
 
-.submit-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.spinner {
-  border: 6px solid #f3f3f3; /* light grey */
-  border-top: 6px solid #00e676; /* accent color */
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-  margin: 0 auto;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
