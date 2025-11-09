@@ -9,7 +9,8 @@ const armorSetsData = [
       { name: "Sunfire Fanatic Chausses", id: "28939", imgName: "Sunfire_fanatic_chausses" }
     ],
     setId: "29424",
-    setImgName: "Sunfire_fanatic_armour_set"
+    setImgName: "Sunfire_fanatic_armour_set",
+	  isF2P: false
   },
   {
     name: "Blood Moon Armour Set",
@@ -20,7 +21,8 @@ const armorSetsData = [
       { name: "Dual Macuahuitl", id: "28997", imgName: "Dual_macuahuitl_detail" }
     ],
     setId: "31136",
-    setImgName: "Blood_moon_armour_set_detail"
+    setImgName: "Blood_moon_armour_set_detail",
+	  isF2P: false
   },
   {
     name: "Blue Moon Armour Set",
@@ -31,7 +33,8 @@ const armorSetsData = [
 	  { name: "Blue Moon Spear", id: "28988", imgName: "Blue_moon_spear_detail" }
     ],
     setId: "31139",
-    setImgName: "Blue_moon_armour_set_detail"
+    setImgName: "Blue_moon_armour_set_detail",
+	  isF2P: false
   },
   {
     name: "Eclipse Moon Armour Set",
@@ -42,7 +45,8 @@ const armorSetsData = [
       { name: "Eclipse Atlatl", id: "29000", imgName: "Eclipse_atlatl_detail" }
     ],
     setId: "31142",
-    setImgName: "Eclipse_moon_armour_set_detail"
+    setImgName: "Eclipse_moon_armour_set_detail",
+	  isF2P: false
   },
 
   // Ancestral Robes Set
@@ -54,7 +58,8 @@ const armorSetsData = [
       { name: "Ancestral robe bottom", id: "21024", imgName: "Ancestral_robe_bottom" }
     ],
     setId: "21049",
-    setImgName: "Ancestral_robes_set"
+    setImgName: "Ancestral_robes_set",
+	  isF2P: false
   },
 
 // Inquisitor's Armour Set
@@ -67,6 +72,7 @@ const armorSetsData = [
   ],
   setId: "24488",
   setImgName: "Inquisitor's_armour_set_detail",
+    isF2P: false,
   layout: "vertical" // optional flag for rendering vertically like wiki
 },
 
@@ -80,7 +86,8 @@ const armorSetsData = [
       { name: "Dagon'hai robe bottom", id: "24294", imgName: "Dagon'hai_robe_bottom_detail" }
     ],
     setId: "24333",
-    setImgName: "Dagon'hai_robes_set_detail"
+    setImgName: "Dagon'hai_robes_set_detail",
+	  isF2P: false
   },
 
   // Justiciar Armour Set
@@ -92,7 +99,8 @@ const armorSetsData = [
       { name: "Justiciar legguards", id: "22328", imgName: "Justiciar_legguards" }
     ],
     setId: "22438",
-    setImgName: "Justiciar_armour_set"
+    setImgName: "Justiciar_armour_set",
+	  isF2P: false
   },
 
   // Oathplate Armour Set
@@ -104,7 +112,8 @@ const armorSetsData = [
       { name: "Oathplate legs", id: "30756", imgName: "Oathplate_legs" }
     ],
     setId: "30744",
-    setImgName: "Oathplate_armour_set"
+    setImgName: "Oathplate_armour_set",
+	  isF2P: false
   },
 
   // Obsidian Armour Set
@@ -116,7 +125,8 @@ const armorSetsData = [
       { name: "Obsidian platelegs", id: "21304", imgName: "Obsidian_platelegs" }
     ],
     setId: "21279",
-    setImgName: "Obsidian_armour_set"
+    setImgName: "Obsidian_armour_set",
+	  isF2P: false
   },
 
   // Virtus Armour Set
@@ -128,7 +138,8 @@ const armorSetsData = [
       { name: "Virtus robe bottom", id: "26245", imgName: "Virtus_robe_bottom" }
     ],
     setId: "31148",
-    setImgName: "Virtus_armour_set"
+    setImgName: "Virtus_armour_set",
+	  isF2P: false
   },
 
   // Dragonstone Armour Set
@@ -142,7 +153,8 @@ const armorSetsData = [
 
     ],
     setId: "23667",
-    setImgName: "Dragonstone_armour_set"
+    setImgName: "Dragonstone_armour_set",
+	  isF2P: false
   },
 
   // Masori Armour Set (f)
@@ -154,7 +166,8 @@ const armorSetsData = [
       { name: "Masori chaps (f)", id: "27241", imgName: "Masori_chaps_(f)_detail" }
     ],
     setId: "27355",
-    setImgName: "Masori_armour_set_(f)_detail"
+    setImgName: "Masori_armour_set_(f)_detail",
+	  isF2P: false
   },
 
   // Hueycoatl Hide Armour Set
@@ -167,7 +180,8 @@ const armorSetsData = [
       { name: "Hueycoatl hide vambraces", id: "30082", imgName: "Hueycoatl_hide_vambraces" }
     ],
     setId: "31169",
-    setImgName: "Hueycoatl_hide_armour_set"
+    setImgName: "Hueycoatl_hide_armour_set",
+	  isF2P: false
   },
 
   // Barrows Sets
@@ -180,7 +194,8 @@ const armorSetsData = [
       { name: "Ahrim's staff", id: "4710", imgName: "Ahrim's_staff_detail" }
     ],
     setId: "12881",
-    setImgName: "Ahrim's_armour_set_detail"
+    setImgName: "Ahrim's_armour_set_detail",
+	  isF2P: false
   },
   {
     name: "Dharok's Armour Set",
@@ -191,7 +206,8 @@ const armorSetsData = [
       { name: "Dharok's greataxe", id: "4718", imgName: "Dharok's_greataxe" }
     ],
     setId: "12877",
-    setImgName: "Dharok's_armour_set"
+    setImgName: "Dharok's_armour_set",
+	  isF2P: false
   },
   {
     name: "Guthan's Armour Set",
@@ -202,7 +218,8 @@ const armorSetsData = [
       { name: "Guthan's warspear", id: "4726", imgName: "Guthan's_warspear" }
     ],
     setId: "12873",
-    setImgName: "Guthan's_armour_set"
+    setImgName: "Guthan's_armour_set",
+	  isF2P: false
   },
   {
     name: "Karil's Armour Set",
@@ -213,7 +230,8 @@ const armorSetsData = [
       { name: "Karil's crossbow", id: "4734", imgName: "Karil's_crossbow" }
     ],
     setId: "12883",
-    setImgName: "Karil's_armour_set"
+    setImgName: "Karil's_armour_set",
+	  isF2P: false
   },
   {
     name: "Torag's Armour Set",
@@ -224,7 +242,8 @@ const armorSetsData = [
       { name: "Torag's hammers", id: "4747", imgName: "Torag's_hammers" }
     ],
     setId: "12879",
-    setImgName: "Torag's_armour_set"
+    setImgName: "Torag's_armour_set",
+	  isF2P: false
   },
   {
     name: "Verac's Armour Set",
@@ -235,12 +254,13 @@ const armorSetsData = [
       { name: "Verac's flail", id: "4755", imgName: "Verac's_flail" }
     ],
     setId: "12875",
-    setImgName: "Verac's_armour_set"
+    setImgName: "Verac's_armour_set",
+	  isF2P: false
   },
   
 //Gilded
 {
-  name: "Gilded Armour Set (lg)&nbsp;<img src='https://oldschool.runescape.wiki/images/Free-to-play_icon.png' alt='F2P' style='width:16px;height:16px;vertical-align:middle;'>&nbsp;",
+  name: "Gilded Armour Set (lg)",
   items: [
     { name: "Gilded Full Helm", id: "3486", imgName: "Gilded_full_helm_detail" },
     { name: "Gilded Platebody", id: "3481", imgName: "Gilded_platebody_detail" },
@@ -253,7 +273,7 @@ const armorSetsData = [
 },
 
 {
-  name: "Gilded Dragonhide Set&nbsp;<img src='https://oldschool.runescape.wiki/images/Free-to-play_icon.png' alt='F2P' style='width:16px;height:16px;vertical-align:middle;'>&nbsp;",
+  name: "Gilded Dragonhide Set",
   items: [
     { name: "Gilded D'hide Body", id: "23264", imgName: "Gilded_d'hide_body_detail" },
     { name: "Gilded D'hide Chaps", id: "23267", imgName: "Gilded_d'hide_chaps_detail" },
@@ -266,7 +286,7 @@ const armorSetsData = [
 
 //F2P God Armour
   {
-  name: "Guthix Armour Set (lg)&nbsp;<img src='https://oldschool.runescape.wiki/images/Free-to-play_icon.png' alt='F2P' style='width:16px;height:16px;vertical-align:middle;'>&nbsp;",
+  name: "Guthix Armour Set (lg)",
   items: [
     { name: "Guthix full helm", id: "2673", imgName: "Guthix_full_helm_detail" },
     { name: "Guthix platebody", id: "2669", imgName: "Guthix_platebody_detail" },
@@ -278,7 +298,7 @@ const armorSetsData = [
   setImgName: "Guthix_armour_set_(lg)_detail"
 },
 {
-  name: "Saradomin Armour Set (lg)&nbsp;<img src='https://oldschool.runescape.wiki/images/Free-to-play_icon.png' alt='F2P' style='width:16px;height:16px;vertical-align:middle;'>&nbsp;",
+  name: "Saradomin Armour Set (lg)",
   items: [
     { name: "Saradomin full helm", id: "2665", imgName: "Saradomin_full_helm_detail" },
     { name: "Saradomin platebody", id: "2661", imgName: "Saradomin_platebody_detail" },
@@ -290,7 +310,7 @@ const armorSetsData = [
   setImgName: "Saradomin_armour_set_(lg)_detail"
 },
 {
-  name: "Zamorak Armour Set (lg)&nbsp;<img src='https://oldschool.runescape.wiki/images/Free-to-play_icon.png' alt='F2P' style='width:16px;height:16px;vertical-align:middle;'>&nbsp;",
+  name: "Zamorak Armour Set (lg)",
   items: [
     { name: "Zamorak full helm", id: "2657", imgName: "Zamorak_full_helm_detail" },
     { name: "Zamorak platebody", id: "2653", imgName: "Zamorak_platebody_detail" },
@@ -303,7 +323,7 @@ const armorSetsData = [
 },
 
 {
-  name: "Rune Armour Set (lg)&nbsp;<img src='https://oldschool.runescape.wiki/images/Free-to-play_icon.png' alt='F2P' style='width:16px;height:16px;vertical-align:middle;'>&nbsp;",
+  name: "Rune Armour Set (lg)",
   items: [
     { name: "Rune full helm", id: "1163", imgName: "Rune_full_helm_detail" },
     { name: "Rune platebody", id: "1127", imgName: "Rune_platebody_detail" },
@@ -314,7 +334,8 @@ const armorSetsData = [
   isF2P: true,
   setImgName: "Rune_armour_set_(lg)_detail"
 },
-	{
+
+{
   name: "Dragon Armour Set (lg)",
   items: [
     { name: "Dragon full helm", id: 11335, imgName: "Dragon_full_helm" },
@@ -322,7 +343,7 @@ const armorSetsData = [
     { name: "Dragon platelegs", id: 4087, imgName: "Dragon_platelegs" },
     { name: "Dragon kiteshield", id: 21895, imgName: "Dragon_kiteshield" }
   ],
-  setId: 21882,
+  setId: "21882",
   setImgName: "Dragon_armour_set_(lg)_detail",
   isF2P: false
 },
@@ -334,7 +355,7 @@ const armorSetsData = [
     { name: "Torva platebody", id: 26384, imgName: "Torva_platebody" },
     { name: "Torva platelegs", id: 26386, imgName: "Torva_platelegs" }
   ],
-  setId: 31145,
+  setId: "31145",
   setImgName: "Torva_armour_set_detail",
   isF2P: false
 },
@@ -347,12 +368,12 @@ const armorSetsData = [
     { name: "Cannon furnace", id: 12, imgName: "Cannon_furnace" },
     { name: "Cannon stand", id: 8, imgName: "Cannon_stand" }
   ],
-  setId: 12863,
+  setId: "12863",
   setImgName: "Dwarf_cannon_set_detail",
   isF2P: false
 },
 {
-  name: "Partyhat Set&nbsp;<img src='https://oldschool.runescape.wiki/images/Free-to-play_icon.png' alt='F2P' style='width:16px;height:16px;vertical-align:middle;'>&nbsp;",
+  name: "Partyhat Set",
   items: [
     { name: "Red partyhat", id: 1038, imgName: "Red_partyhat" },
     { name: "Yellow partyhat", id: 1040, imgName: "Yellow_partyhat" },
@@ -361,10 +382,112 @@ const armorSetsData = [
     { name: "Purple partyhat", id: 1046, imgName: "Purple_partyhat" },
     { name: "White partyhat", id: 1048, imgName: "White_partyhat" }
   ],
-  setId: 13173,
+  setId: "13173",
   setImgName: "Partyhat_set_detail",
   isF2P: true
-}
+},
+
+
+
+  {
+    name: "Rune Gold Trimmed Armour Set (lg)",
+    items: [
+      { name: "Rune full helm (g)", id: "2619", imgName: "Rune_full_helm_(g)" },
+      { name: "Rune platebody (g)", id: "2615", imgName: "Rune_platebody_(g)" },
+      { name: "Rune platelegs (g)", id: "2617", imgName: "Rune_platelegs_(g)" },
+      { name: "Rune kiteshield (g)", id: "2621", imgName: "Rune_kiteshield_(g)" }
+    ],
+    setId: "13032",
+    setImgName: "Rune_gold-trimmed_set_(lg)_detail",
+    isF2P: true
+  },
+  {
+    name: "Adamant Gold Trimmed Armour Set (lg)",
+    items: [
+      { name: "Adamant full helm (g)", id: "2613", imgName: "Adamant_full_helm_(g)" },
+      { name: "Adamant platebody (g)", id: "2607", imgName: "Adamant_platebody_(g)" },
+      { name: "Adamant platelegs (g)", id: "2609", imgName: "Adamant_platelegs_(g)" },
+      { name: "Adamant kiteshield (g)", id: "2611", imgName: "Adamant_kiteshield_(g)" }
+    ],
+    setId: "13020",
+    setImgName: "Adamant_gold-trimmed_set_(lg)_detail",
+    isF2P: true
+  },
+  {
+    name: "Mithril Gold Trimmed Armour Set (lg)",
+    items: [
+      { name: "Mithril full helm (g)", id: "12283", imgName: "Mithril_full_helm_(g)" },
+      { name: "Mithril platebody (g)", id: "12277", imgName: "Mithril_platebody_(g)" },
+      { name: "Mithril platelegs (g)", id: "12279", imgName: "Mithril_platelegs_(g)" },
+      { name: "Mithril kiteshield (g)", id: "12281", imgName: "Mithril_kiteshield_(g)" }
+    ],
+    setId: "13008",
+    setImgName: "Mithril_gold-trimmed_set_(lg)_detail",
+    isF2P: true
+  },
+  {
+    name: "Black Gold Trimmed Armour Set (lg)",
+    items: [
+      { name: "Black full helm (g)", id: "2595", imgName: "Black_full_helm_(g)" },
+      { name: "Black platebody (g)", id: "2591", imgName: "Black_platebody_(g)" },
+      { name: "Black platelegs (g)", id: "2593", imgName: "Black_platelegs_(g)" },
+      { name: "Black kiteshield (g)", id: "2597", imgName: "Black_kiteshield_(g)" }
+    ],
+    setId: "12996",
+    setImgName: "Black_gold-trimmed_set_(lg)_detail",
+    isF2P: true
+  },
+  {
+    name: "Steel Gold Trimmed Armour Set (lg)",
+    items: [
+      { name: "Steel full helm (g)", id: "20178", imgName: "Steel_full_helm_(g)" },
+      { name: "Steel platebody (g)", id: "20169", imgName: "Steel_platebody_(g)" },
+      { name: "Steel platelegs (g)", id: "20172", imgName: "Steel_platelegs_(g)" },
+      { name: "Steel kiteshield (g)", id: "20181", imgName: "Steel_kiteshield_(g)" }
+    ],
+    setId: "20382",
+    setImgName: "Steel_gold-trimmed_set_(lg)_detail",
+    isF2P: true
+  },
+  {
+    name: "Iron Gold Trimmed Armour Set (lg)",
+    items: [
+      { name: "Iron full helm (g)", id: "12241", imgName: "Iron_full_helm_(g)" },
+      { name: "Iron platebody (g)", id: "12235", imgName: "Iron_platebody_(g)" },
+      { name: "Iron platelegs (g)", id: "12237", imgName: "Iron_platelegs_(g)" },
+      { name: "Iron kiteshield (g)", id: "12243", imgName: "Iron_kiteshield_(g)" }
+    ],
+    setId: "12980",
+    setImgName: "Iron_gold-trimmed_set_(lg)_detail",
+    isF2P: true
+  },
+  {
+    name: "Bronze Gold Trimmed Armour Set (lg)",
+    items: [
+      { name: "Bronze full helm (g)", id: "12211", imgName: "Bronze_full_helm_(g)" },
+      { name: "Bronze platebody (g)", id: "12205", imgName: "Bronze_platebody_(g)" },
+      { name: "Bronze platelegs (g)", id: "12207", imgName: "Bronze_platelegs_(g)" },
+      { name: "Bronze kiteshield (g)", id: "12213", imgName: "Bronze_kiteshield_(g)" }
+    ],
+    setId: "12968",
+    setImgName: "Bronze_gold-trimmed_set_(lg)_detail",
+    isF2P: true
+  },
+
+{
+  name: "Halloween Mask Set",
+  items: [
+    { name: "Red halloween mask", id: "1057", imgName: "Red_halloween_mask" },
+    { name: "Green halloween mask", id: "1053", imgName: "Green_halloween_mask" },
+    { name: "Blue halloween mask", id: "1055", imgName: "Blue_halloween_mask" }
+  ],
+  setId: "13175",
+  setImgName: "Halloween_mask_set_detail",
+  isF2P: true
+},
+
+
+
 
 ];
 
