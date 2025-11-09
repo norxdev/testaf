@@ -1,108 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic Meta -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css?v=2">
-
-<!-- Favicon and App Icons -->
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
-<link rel="shortcut icon" href="/favicon.ico">
-<link rel="manifest" href="/site.webmanifest">
-
-  <!-- Primary SEO -->
-  <title>Armour Flipper | OSRS Flipping Tool</title>
-  <meta name="description" content="Armour Flipper is a free OSRS tool that helps players maximize profit by flipping armor sets on the Grand Exchange with real-time price data.">
-  <meta name="keywords" content="OSRS, Old School RuneScape, Armour Flipper, Grand Exchange, Profit, Item set, Armour set, Armour sets, Flipping, Prices, Full set, Individual pieces, Players, Grand Exchange prices, Flipping armour sets">
-  <link rel="canonical" href="https://www.armourflipper.com/">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="Norxdev">
-  <meta name="publisher" content="Norxdev">
-  <meta name="language" content="EN">
-  <meta name="distribution" content="global">
-  <meta name="rating" content="general">
-
-  <!-- Sitemap -->
-  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.armourflipper.com/sitemap.xml">
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Armour Flipper",
-    "operatingSystem": "Web",
-    "applicationCategory": "GameApplication",
-    "url": "https://www.armourflipper.com/",
-    "description": "Armour Flipper is a free tool to help Old School RuneScape players maximize profit by flipping armor sets on the Grand Exchange.",
-    "author": { "@type": "Person", "name": "Norxdev" }
-  }
-  </script>
-
-  <!-- Google Tag Manager -->
-  <script>
-    (function(w,d,s,l,i){
-      w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
-      var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
-      j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-      f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-K6L68P6W');
-  </script>
-</head>
-<body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K6L68P6W"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe>
-  </noscript>
 
   <!-- Sticky Header -->
   <header class="sticky-header">
     <div class="header-left">
-      <div class="site-title">
+      <div class="site-title" style="cursor:pointer;" onclick="window.location.href='https://www.armourflipper.com';">
         <img src="faviconAF-v2.png" alt="AF Icon" class="title-icon">
         Armour Flipper
       </div>
     </div>
     <div class="header-right">
-      <a class="donate-btn-header" 
-         href="https://www.paypal.com/donate/?hosted_button_id=YVZNTWZP8JUCC" 
-         target="_blank">
-         Donate
-      </a>
+      <a class="donate-btn-header" href="https://www.paypal.com/donate/?hosted_button_id=YVZNTWZP8JUCC" target="_blank">Donate</a>
     </div>
   </header>
 
   <!-- Main Content -->
-<main class="main-content">
-  <section class="website-summary">
-    <p>This is a tool to help players make profit in Old School RuneScape by flipping armour sets.</p>
-    <h2>How to Flip Armour Sets</h2>
-    <p>Buy individual armour pieces (like helm, platebody, legs, etc.) and combine them to create a full set for higher profit.</p>
-    <ol>
-      <li><strong>Purchase:</strong> Acquire the individual pieces from the Grand Exchange at the prices listed below.</li>
-      <li><strong>Combine:</strong> Bring the pieces to a Grand Exchange Clerk to assemble them into a complete armour set.</li>
-      <li><strong>Sell:</strong> List the full set for sale on the Grand Exchange at the prices indicated below to maximize your profit.</li>
-    </ol>
-    <p>Select an armour set from the summary table below to view detailed information on its individual pieces and set prices.</p>
-    <p>All profits displayed below take the <strong>2% Grand Exchange tax</strong> into account.</p>
+  <main class="main-content">
+    <section class="website-summary">
+      <p>This is a tool to help players make profit in Old School RuneScape by flipping armour sets.</p>
+      <h2>How to Flip Armour Sets</h2>
+      <p>Buy individual armour pieces (like helm, platebody, legs, etc.) and combine them to create a full set for higher profit.</p>
+      <ol>
+        <li><strong>Purchase:</strong> Acquire the individual pieces from the Grand Exchange at the prices listed below.</li>
+        <li><strong>Combine:</strong> Bring the pieces to a Grand Exchange Clerk to assemble them into a complete armour set.</li>
+        <li><strong>Sell:</strong> List the full set for sale on the Grand Exchange at the prices indicated below to maximize your profit.</li>
+      </ol>
+      <p>Select an armour set from the summary table below to view detailed information on its individual pieces and set prices.</p>
+      <p>All profits displayed below take the <strong>2% Grand Exchange tax</strong> into account.</p>
 
-    <!-- Feedback Section -->
-    <div class="feedback-section">
-      <p>Have a suggestion? <button id="feedbackBtn" class="feedback-btn">Let me know</button></p>
-    </div>
-  </section>
-</main>
-
-
-  <!-- Summary Toggle -->
-  <button id="toggleSummary" class="toggle-summary-btn">Hide Summary ▲</button>
+      <!-- Feedback Section -->
+      <div class="feedback-section">
+        <p>Have a suggestion? <button id="feedbackBtn" class="feedback-btn">Let me know</button></p>
+      </div>
+    </section>
+  </main>
 
   <!-- Armor Summary with Loading Spinner -->
   <div id="armorSummary">
@@ -114,41 +46,24 @@
   <!-- Detailed Armor Section -->
   <div id="armorSection" class="container"></div>
   
-      <!-- Google AdSense In-Article Ad -->
-    <div class="ad-container">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2729054958892731"
-        crossorigin="anonymous"></script>
-      <ins class="adsbygoogle"
-        style="display:block; text-align:center;"
-        data-ad-layout="in-article"
-        data-ad-format="fluid"
-        data-ad-client="ca-pub-2729054958892731"
-        data-ad-slot="6722798047"></ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </div>
-  
-</main>
 
-<!-- Floating Buttons -->
-<button id="backToTop" class="floating-btn" aria-label="Scroll to top">
-  <svg viewBox="0 0 24 24" width="24" height="24" fill="white" class="floating-icon">
-    <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.59 5.58L20 12l-8-8-8 8z"/>
-  </svg>
-</button>
 
-<button id="refreshData" class="floating-btn" aria-label="Refresh data">
-  <svg viewBox="0 0 24 24" width="24" height="24" fill="white" class="floating-icon">
-    <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4 7.58 4 4 7.58 4 12h2a6 6 0 0 1 11.29-3.71l-2.88 2.88H20V4l-2.35 2.35zM6.35 17.65C7.8 19.1 9.79 20 12 20c4.42 0 8-3.58 8-8h-2a6 6 0 0 1-11.29 3.71l2.88-2.88H4v6l2.35-2.35z"/>
-  </svg>
-</button>
+  <!-- Floating Buttons -->
+  <button id="backToTop" class="floating-btn" aria-label="Scroll to top">
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="white" class="floating-icon">
+      <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.59 5.58L20 12l-8-8-8 8z"/>
+    </svg>
+  </button>
 
+  <button id="refreshData" class="floating-btn" aria-label="Refresh data">
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="white" class="floating-icon">
+      <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4 7.58 4 4 7.58 4 12h2a6 6 0 0 1 11.29-3.71l-2.88 2.88H20V4l-2.35 2.35zM6.35 17.65C7.8 19.1 9.79 20 12 20c4.42 0 8-3.58 8-8h-2a6 6 0 0 1-11.29 3.71l2.88-2.88H4v6l2.35-2.35z"/>
+    </svg>
+  </button>
 
   <!-- JS Scripts -->
-<script src="itemid.js?v=2"></script>
-<script src="script.js?v=2"></script>
-
+  <script src="itemid.js?v=2"></script>
+  <script src="script.js?v=2"></script>
 
   <footer id="pageFooter" style="text-align:center; padding:10px; font-size:0.9rem; color:#888; margin-top:20px;">
     &copy; <span id="currentYear"></span> Armour Flipper. Created by Norxdev.
