@@ -1,4 +1,4 @@
-// --- Armor Sets --- 
+// --- Armor Sets ---  
 const armorSetsData = [
   // Sunfire & Moon Sets
   {
