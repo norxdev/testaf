@@ -1,4 +1,4 @@
-// --- Global Data --- 
+// --- Global Data ---
 let latestData = {};
 let volumesData = {};
 let itemMapping = {};
@@ -48,97 +48,119 @@ function createArmorSections() {
         div.dataset.f2p = set.isF2P ? "true" : "false";
         div.style.display = "none"; // hide initially
 
-        // Full set header with image, cost range, and profit
-        const setHeader = `
-            <div class="set-header" style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
-                <img src="https://oldschool.runescape.wiki/images/${set.setImgName}.png" 
-                     alt="${set.name}" loading="lazy"
-                     style="width:80px; height:80px; object-fit:contain; border:1px solid #ccc; border-radius:6px;">
-                <div>
-                    <h2 style="margin:0 0 4px 0;">${set.name}</h2>
-                    <div id="armor-setCostRange-${idx}" style="margin-bottom:2px;">Loading cost...</div>
-                    <div id="armor-setProfitRange-${idx}" style="font-weight:bold;">Loading profit...</div>
-                    <div id="armor-setVolume-${idx}" style="font-size:0.85rem; color:#555;">Loading volume...</div>
-                </div>
-            </div>
-        `;
-
         // Pieces grid
         const piecesGrid = `
-            <div class="pieces-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap:8px;">
+            <div class="pieces-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap:10px; margin-bottom:8px;">
                 ${set.items.map(it => `
-                    <div class="piece-card" style="border:1px solid #ccc; border-radius:6px; padding:6px; text-align:center;">
-                        <a href="https://prices.runescape.wiki/osrs/item/${it.id}" target="_blank">
-                            <img src="https://oldschool.runescape.wiki/images/${it.imgName}.png" 
-                                 alt="${it.name}" loading="lazy"
-                                 style="width:48px; height:48px; object-fit:contain;">
-                        </a>
-                        <div class="piece-name" style="font-size:0.85rem; margin-top:4px;">${it.name}</div>
-                        <div class="piece-price" style="font-size:0.85rem; margin-top:2px;">Loading...</div>
-                        <div class="piece-volume" style="font-size:0.75rem; color:#555;">Loading...</div>
+                    <div class="piece-card" style="border:1px solid #ccc; border-radius:6px; padding:6px; display:flex; justify-content:space-between; align-items:center; gap:10px;">
+                        <div class="left" style="text-align:center;">
+                            <a href="https://prices.runescape.wiki/osrs/item/${it.id}" target="_blank">
+                                <img src="https://oldschool.runescape.wiki/images/${it.imgName}.png" 
+                                     alt="${it.name}" loading="lazy"
+                                     style="width:48px; height:48px; object-fit:contain; cursor:pointer;">
+                            </a>
+                            <div class="piece-name" style="font-size:0.85rem; margin-top:4px;">${it.name}</div>
+                            <div class="piece-volume" style="font-size:0.75rem; color:#555;">Loading volume...</div>
+                        </div>
+                        <div class="right" style="text-align:right; font-size:0.85rem;">
+                            <div class="piece-price-buy">Loading...</div>
+                        </div>
                     </div>
                 `).join("")}
             </div>
         `;
 
-        div.innerHTML = setHeader + piecesGrid;
+        // Total buy cost below pieces
+        const totalBuyDiv = `<div class="set-total-buy" style="font-weight:bold; margin-bottom:12px;">Loading total buy cost...</div>`;
+
+        // Set footer (icon clickable, sell price, profit after tax, ROI after tax, set volume)
+        const setFooter = `
+            <div class="set-footer" style="display:flex; align-items:center; gap:12px; margin-bottom:24px; border-top:1px solid #333; padding-top:10px;">
+                <img src="https://oldschool.runescape.wiki/images/${set.setImgName}.png" 
+                     alt="${set.name}" loading="lazy"
+                     style="width:80px; height:80px; object-fit:contain; border:1px solid #ccc; border-radius:6px; cursor:pointer;"
+                     onclick="window.open('https://prices.runescape.wiki/osrs/item/${set.setId}', '_blank')">
+                <div>
+                    <h2 style="margin:0 0 4px 0;">${set.name}</h2>
+                    <div id="armor-setSell-${idx}" style="margin-bottom:2px;">Loading set sell price...</div>
+                    <div id="armor-setProfitRange-${idx}" style="margin-bottom:2px; font-weight:bold;">Loading profit...</div>
+                    <div id="armor-setROI-${idx}" style="margin-bottom:2px; font-size:0.85rem; color:#555;">Loading ROI...</div>
+                    <div id="armor-setVolume-${idx}" style="font-size:0.85rem; color:#555;">Loading set volume...</div>
+                </div>
+            </div>
+        `;
+
+        div.innerHTML = piecesGrid + totalBuyDiv + setFooter;
         container.appendChild(div);
     });
 }
 
+
+
+
 // --- Update Prices for Armor Section ---
 function updateArmorPrices() {
     armorSetsData.forEach((set, idx) => {
-    let totalLow = 0;
-    let totalHigh = 0;
-    let minVol = Infinity; // for set volume
+        let totalBuy = 0;
+        let setSell = Number(latestData.data?.[set.setId]?.high) || 0;
+        let minVol = Infinity;
 
-    set.items.forEach(item => {
-        const low = Number(latestData.data?.[item.id]?.low) || 0;
-        const high = Number(latestData.data?.[item.id]?.high) || 0;
-        const vol = volumesData.data?.[item.id] || 0;
+        // Update individual pieces
+        set.items.forEach(item => {
+            const low = Number(latestData.data?.[item.id]?.low) || 0;
+            const vol = Number(volumesData.data?.[item.id]) || 0;
 
-        totalLow += low;
-        totalHigh += high;
-        if (vol) minVol = Math.min(minVol, vol);
+            totalBuy += low;
+            if (vol) minVol = Math.min(minVol, vol);
 
-        // update piece cards
-        const pieceCards = document.querySelectorAll(`#armor-set-${idx} .piece-card img`);
-        let pieceCard = null;
-        pieceCards.forEach(img => { if (img.alt === item.name) pieceCard = img.closest(".piece-card"); });
-        if (pieceCard) {
-            const priceEl = pieceCard.querySelector(".piece-price");
-            priceEl.textContent = `Buy: ${formatNum(low)} gp | Sell: ${formatNum(high)} gp`;
+            const pieceCard = [...document.querySelectorAll(`#armor-set-${idx} .piece-card img`)]
+                .find(img => img.alt === item.name)?.closest(".piece-card");
+            if (!pieceCard) return;
+
+            const buyEl = pieceCard.querySelector(".piece-price-buy");
+            if (buyEl) buyEl.textContent = low ? `Buy: ${formatNum(low)} gp` : "Buy: —";
 
             const volEl = pieceCard.querySelector(".piece-volume");
-            volEl.textContent = vol ? `Daily vol: ${formatNum(vol)}` : `Daily vol: —`;
+            if (volEl) volEl.textContent = vol ? `Daily vol: ${formatNum(vol)}` : "Daily vol: —";
+        });
+
+        // Total buy cost below pieces
+        const totalBuyEl = document.querySelector(`#armor-set-${idx} .set-total-buy`);
+        if (totalBuyEl) totalBuyEl.textContent = `Total buy cost: ${formatNum(totalBuy)} gp`;
+
+        // Set footer
+        const tax = Math.min(setSell * 0.02, 5_000_000);
+        const gain = setSell - tax - totalBuy;
+
+        const sellEl = document.getElementById(`armor-setSell-${idx}`);
+        if (sellEl) sellEl.textContent = `Set sell price: ${formatNum(setSell)} gp`;
+
+        const profitEl = document.getElementById(`armor-setProfitRange-${idx}`);
+        if (profitEl) {
+            const gainColor = gain >= 0 ? "#4caf50" : "#f44336";
+            profitEl.innerHTML = `Set profit (after tax): <span style="color:${gainColor};">${formatNum(gain)} gp</span>`;
+        }
+
+        const roiEl = document.getElementById(`armor-setROI-${idx}`);
+        if (roiEl) {
+            const roiAfterTax = totalBuy ? ((gain / totalBuy) * 100).toFixed(2) : 0;
+            roiEl.textContent = `ROI (after tax): ${roiAfterTax}%`;
+        }
+
+        const setVolEl = document.getElementById(`armor-setVolume-${idx}`);
+        if (setVolEl) {
+            setVolEl.textContent = isFinite(minVol) && minVol > 0
+                ? `Set daily vol: ${formatNum(minVol)}`
+                : `Set daily vol: —`;
         }
     });
-
-    // profit range after 2% tax
-    const taxLow = Math.min(totalLow * 0.02, 5_000_000);
-    const taxHigh = Math.min(totalHigh * 0.02, 5_000_000);
-
-    const profitLow = totalHigh - taxHigh - totalLow;
-    const profitHigh = totalHigh - taxLow - totalLow;
-
-    // update set summary
-    const costRangeEl = document.getElementById(`armor-setCostRange-${idx}`);
-    if (costRangeEl) costRangeEl.textContent = `Total pieces cost: ${formatNum(totalLow)} gp`;
-
-    const profitRangeEl = document.getElementById(`armor-setProfitRange-${idx}`);
-    if (profitRangeEl) {
-        const volText = minVol !== Infinity ? ` | Daily sets vol: ${formatNum(minVol)}` : '';
-        profitRangeEl.textContent = `Potential profit (after tax): ${formatNum(profitLow)} - ${formatNum(profitHigh)} gp${volText}`;
-    }
-});
-
 }
 
-
-// --- Update Volumes for Pieces Only ---
+// --- Update Volumes for Pieces AND Sets ---
 function updateVolumes() {
     armorSetsData.forEach((set, idx) => {
+        let minVol = Infinity;
+
         set.items.forEach(item => {
             const pieceCards = document.querySelectorAll(`#armor-set-${idx} .piece-card img`);
             let pieceCard = null;
@@ -148,12 +170,23 @@ function updateVolumes() {
 
             if (pieceCard) {
                 const volEl = pieceCard.querySelector(".piece-volume");
-                const vol = volumesData.data?.[item.id] || 0;
-                volEl.textContent = `Daily vol: ${formatNum(vol)}`;
+                const vol = Number(volumesData.data?.[item.id]) || 0;
+                if (vol) minVol = Math.min(minVol, vol);
+                volEl.textContent = vol ? `Daily vol: ${formatNum(vol)}` : "Daily vol: —";
             }
         });
+
+        // Update set volume
+        const setVolEl = document.getElementById(`armor-setVolume-${idx}`);
+        if (setVolEl) {
+            setVolEl.textContent = isFinite(minVol) && minVol > 0
+                ? `Set daily vol: ${formatNum(minVol)}`
+                : `Set daily vol: —`;
+        }
     });
 }
+
+
 
 
 // --- F2P Filter for Armor Section ---
