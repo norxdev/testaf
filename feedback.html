@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,29 +9,12 @@
   <link rel="apple-touch-icon" href="faviconAF-v2.png">
 
   <title>Armour Flipper | Feedback</title>
-
-  <!-- Google Tag Manager -->
-  <script>
-    (function(w,d,s,l,i){
-      w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
-      var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
-      j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-      f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-K6L68P6W');
-  </script>
 </head>
 <body>
-  <!-- GTM (noscript) -->
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K6L68P6W"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe>
-  </noscript>
-
   <!-- Header -->
   <header class="sticky-header">
     <div class="header-left">
-      <div class="site-title" style="cursor:pointer;" onclick="window.location.href='https://www.armourflipper.com';">
+      <div class="site-title" style="cursor:pointer;" onclick="window.location.href='index.html';">
         <img src="faviconAF-v2.png" alt="AF Icon" class="title-icon">
         Armour Flipper
       </div>
@@ -42,33 +25,35 @@
   </header>
 
   <!-- Main Content -->
-    <main class="main-content">
-    <h2 style="text-align:center">
-      Feedback
-    </h2>
-    <form id="feedbackForm" class="feedback-form">
-      <label for="category">Category:</label>
-      <select id="category" name="subject" required>
-        <option value="">Select...</option>
-        <option value="general">General Feedback</option>
-        <option value="bug">Report a Bug</option>
-        <option value="suggestion">Feature Suggestion</option>
-        <option value="other">Other</option>
-      </select>
+  <main class="main-content">
+    <div class="set-wrapper" style="max-width:600px; width:100%;">
+      <h2 style="text-align:center; margin-bottom:20px;">Feedback</h2>
 
-      <label for="message">Message:</label>
-      <textarea id="message" name="message" placeholder="Type your message" required></textarea>
+      <form id="feedbackForm" class="feedback-form" style="display:flex; flex-direction:column; gap:12px;">
+        <label for="category">Category:</label>
+        <select id="category" name="subject" required class="piece-name" style="padding:8px; border-radius:6px; border:1px solid var(--border-dark); background-color: var(--bg-darker); color: var(--text-light);">
+          <option value="">Select...</option>
+          <option value="general">General Feedback</option>
+          <option value="bug">Report a Bug</option>
+          <option value="suggestion">Feature Suggestion</option>
+          <option value="other">Other</option>
+        </select>
 
-      <button type="submit" class="submit-btn">Submit Feedback</button>
-      <a href="https://www.armourflipper.com" class="go-back-btn">Go Back</a>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" placeholder="Type your message" required
+          style="padding:8px; border-radius:6px; border:1px solid var(--border-dark); background-color: var(--bg-darker); color: var(--text-light); min-height:120px;"></textarea>
 
-      <p id="successMessage" style="color: var(--accent); display:none; margin-top:12px;">
-        Thank you! Your feedback has been submitted.
-      </p>
-      <p id="errorMessage" style="color: #ff3d00; display:none; margin-top:12px;">
-        Error submitting feedback. Please try again.
-      </p>
-    </form>
+        <button type="submit" class="donate-btn-header" style="align-self:flex-start;">Submit Feedback</button>
+        <a href="index.html" class="donate-btn-header" style="align-self:flex-start; margin-top:4px;">Go Back</a>
+
+        <p id="successMessage" style="color: var(--accent); display:none; margin-top:12px;">
+          Thank you! Your feedback has been submitted.
+        </p>
+        <p id="errorMessage" style="color: #ff3d00; display:none; margin-top:12px;">
+          Error submitting feedback. Please try again.
+        </p>
+      </form>
+    </div>
   </main>
 
   <!-- Footer -->
@@ -80,10 +65,9 @@
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
     const form = document.getElementById('feedbackForm');
-    const submitBtn = form.querySelector('.submit-btn');
+    const submitBtn = form.querySelector('button[type="submit"]');
     const successMsg = document.getElementById('successMessage');
     const errorMsg = document.getElementById('errorMessage');
-    const goBackBtn = form.querySelector('.go-back-btn');
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -101,10 +85,8 @@
         });
 
         if (response.ok) {
-          // Remove form fields and submit button
           form.querySelectorAll('label, select, textarea, button').forEach(el => el.remove());
           successMsg.style.display = 'block';
-          goBackBtn.style.display = 'inline-block';
         } else {
           errorMsg.style.display = 'block';
           submitBtn.disabled = false;
