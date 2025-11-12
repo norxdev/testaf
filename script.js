@@ -48,49 +48,54 @@ function createArmorSections() {
         div.dataset.f2p = set.isF2P ? "true" : "false";
         div.style.display = "none"; // hide initially
 
-        // Pieces grid
-        const piecesGrid = `
-            <div class="pieces-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap:10px; margin-bottom:8px;">
+        // Each piece shown as its own row
+        const piecesList = `
+            <div class="pieces-list">
                 ${set.items.map(it => `
-                    <div class="piece-card" style="border:1px solid #ccc; border-radius:6px; padding:6px; display:flex; justify-content:space-between; align-items:center; gap:10px;">
-                        <div class="left" style="text-align:center;">
-                            <a href="https://prices.runescape.wiki/osrs/item/${it.id}" target="_blank">
-                                <img src="https://oldschool.runescape.wiki/images/${it.imgName}.png" 
-                                     alt="${it.name}" loading="lazy"
-                                     style="width:48px; height:48px; object-fit:contain; cursor:pointer;">
-                            </a>
-                            <div class="piece-name" style="font-size:0.85rem; margin-top:4px;">${it.name}</div>
-                            <div class="piece-volume" style="font-size:0.75rem; color:#555;">Loading volume...</div>
+                    <div class="piece-card">
+                        <div class="piece-left">
+                            <div class="piece-icon-box">
+                                <a href="https://prices.runescape.wiki/osrs/item/${it.id}" target="_blank">
+                                    <img src="https://oldschool.runescape.wiki/images/${it.imgName}.png" 
+                                         alt="${it.name}" loading="lazy" class="piece-icon">
+                                </a>
+                            </div>
+                            <div class="piece-info">
+                                <div class="piece-name">${it.name}</div>
+                                <div class="piece-volume">Loading volume...</div>
+                            </div>
                         </div>
-                        <div class="right" style="text-align:right; font-size:0.85rem;">
-                            <div class="piece-price-buy">Loading...</div>
-                        </div>
+                        <div class="piece-price-buy">Loading...</div>
                     </div>
                 `).join("")}
             </div>
         `;
 
         // Total buy cost below pieces
-        const totalBuyDiv = `<div class="set-total-buy" style="font-weight:bold; margin-bottom:12px;">Loading total buy cost...</div>`;
+        const totalBuyDiv = `<div class="set-total-buy">Loading total buy cost...</div>`;
 
-        // Set footer (icon clickable, sell price, profit after tax, ROI after tax, set volume)
-        const setFooter = `
-            <div class="set-footer" style="display:flex; align-items:center; gap:12px; margin-bottom:24px; border-top:1px solid #333; padding-top:10px;">
-                <img src="https://oldschool.runescape.wiki/images/${set.setImgName}.png" 
+        // Set info with image inside the set info container
+        const setBottom = `
+    <div class="piece-card set-card">
+        <div class="piece-left">
+            <div class="piece-icon-box">
+                <img src="https://oldschool.runescape.wiki/images/${set.setImgName}.png"
                      alt="${set.name}" loading="lazy"
-                     style="width:80px; height:80px; object-fit:contain; border:1px solid #ccc; border-radius:6px; cursor:pointer;"
                      onclick="window.open('https://prices.runescape.wiki/osrs/item/${set.setId}', '_blank')">
-                <div>
-                    <h2 style="margin:0 0 4px 0;">${set.name}</h2>
-                    <div id="armor-setSell-${idx}" style="margin-bottom:2px;">Loading set sell price...</div>
-                    <div id="armor-setProfitRange-${idx}" style="margin-bottom:2px; font-weight:bold;">Loading profit...</div>
-                    <div id="armor-setROI-${idx}" style="margin-bottom:2px; font-size:0.85rem; color:#555;">Loading ROI...</div>
-                    <div id="armor-setVolume-${idx}" style="font-size:0.85rem; color:#555;">Loading set volume...</div>
-                </div>
             </div>
-        `;
+            <div class="piece-info">
+                <div class="piece-name">${set.name}</div>
+                <div id="armor-setProfitRange-${idx}" class="set-profit">Loading profit after tax...</div>
+                <div id="armor-setROI-${idx}" class="set-roi">Loading ROI...</div>
+                <div id="armor-setVolume-${idx}" class="piece-volume">Loading set volume...</div>
+            </div>
+        </div>
+        <div class="piece-price-buy" id="armor-setSell-${idx}">Loading set sell price...</div>
+    </div>
+`;
 
-        div.innerHTML = piecesGrid + totalBuyDiv + setFooter;
+
+        div.innerHTML = piecesList + totalBuyDiv + setBottom;
         container.appendChild(div);
     });
 }
@@ -113,8 +118,8 @@ function updateArmorPrices() {
             totalBuy += low;
             if (vol) minVol = Math.min(minVol, vol);
 
-            const pieceCard = [...document.querySelectorAll(`#armor-set-${idx} .piece-card img`)]
-                .find(img => img.alt === item.name)?.closest(".piece-card");
+            const img = document.querySelector(`#armor-set-${idx} .piece-card img[alt="${item.name}"]`);
+            const pieceCard = img ? img.closest(".piece-card") : null;
             if (!pieceCard) return;
 
             const buyEl = pieceCard.querySelector(".piece-price-buy");
@@ -124,11 +129,11 @@ function updateArmorPrices() {
             if (volEl) volEl.textContent = vol ? `Daily vol: ${formatNum(vol)}` : "Daily vol: —";
         });
 
-        // Total buy cost below pieces
+        // Total buy cost
         const totalBuyEl = document.querySelector(`#armor-set-${idx} .set-total-buy`);
         if (totalBuyEl) totalBuyEl.textContent = `Total buy cost: ${formatNum(totalBuy)} gp`;
 
-        // Set footer
+        // Set profit, ROI, and volume
         const tax = Math.min(setSell * 0.02, 5_000_000);
         const gain = setSell - tax - totalBuy;
 
@@ -137,8 +142,8 @@ function updateArmorPrices() {
 
         const profitEl = document.getElementById(`armor-setProfitRange-${idx}`);
         if (profitEl) {
-            const gainColor = gain >= 0 ? "#4caf50" : "#f44336";
-            profitEl.innerHTML = `Set profit (after tax): <span style="color:${gainColor};">${formatNum(gain)} gp</span>`;
+            const gainColor = gain >= 0 ? "profit-positive" : "profit-negative";
+            profitEl.innerHTML = `Set profit (after tax): <span class="${gainColor}">${formatNum(gain)} gp</span>`;
         }
 
         const roiEl = document.getElementById(`armor-setROI-${idx}`);
@@ -156,27 +161,24 @@ function updateArmorPrices() {
     });
 }
 
+
 // --- Update Volumes for Pieces AND Sets ---
 function updateVolumes() {
     armorSetsData.forEach((set, idx) => {
         let minVol = Infinity;
 
         set.items.forEach(item => {
-            const pieceCards = document.querySelectorAll(`#armor-set-${idx} .piece-card img`);
-            let pieceCard = null;
-            pieceCards.forEach(img => {
-                if (img.alt === item.name) pieceCard = img.closest(".piece-card");
-            });
+            const img = document.querySelector(`#armor-set-${idx} .piece-card img[alt="${item.name}"]`);
+            const pieceCard = img ? img.closest(".piece-card") : null;
 
             if (pieceCard) {
                 const volEl = pieceCard.querySelector(".piece-volume");
                 const vol = Number(volumesData.data?.[item.id]) || 0;
                 if (vol) minVol = Math.min(minVol, vol);
-                volEl.textContent = vol ? `Daily vol: ${formatNum(vol)}` : "Daily vol: —";
+                if (volEl) volEl.textContent = vol ? `Daily vol: ${formatNum(vol)}` : "Daily vol: —";
             }
         });
 
-        // Update set volume
         const setVolEl = document.getElementById(`armor-setVolume-${idx}`);
         if (setVolEl) {
             setVolEl.textContent = isFinite(minVol) && minVol > 0
@@ -189,26 +191,43 @@ function updateVolumes() {
 
 
 
-// --- F2P Filter for Armor Section ---
-function applyArmorF2PFilter(onlyF2P) {
-    armorSetsData.forEach((set, idx) => {
-        // Cards
-        const cards = document.querySelectorAll(`#armor-set-${idx} .card`);
-        cards.forEach(card => {
-            const isF2P = card.closest(".set-wrapper").dataset.f2p === "true";
-            card.style.display = (onlyF2P && !isF2P) ? "none" : "";
-        });
 
-        // Table rows
-        set.items.forEach(item => {
-            const row = document.getElementById(`armor-table-row-${idx}-${item.id}`);
-            if (row) {
-                const isF2P = item.isF2P || false;
-                row.style.display = (onlyF2P && !isF2P) ? "none" : "";
-            }
-        });
+// --- Apply F2P filter for both armor section and summary table ---
+function applyF2PFilter(onlyF2P) {
+    // Armor Section
+    armorSetsData.forEach((set, idx) => {
+        const el = document.getElementById(`armor-set-${idx}`);
+        if (!el) return;
+        if (onlyF2P && !set.isF2P) {
+            el.style.display = "none";
+        } else {
+            el.style.display = "block";
+        }
+    });
+
+    // Summary Table
+    document.querySelectorAll("#armorSummaryTable tbody tr").forEach(row => {
+        const isF2P = row.getAttribute("data-f2p") === "true";
+        row.style.display = (onlyF2P && !isF2P) ? "none" : "";
     });
 }
+
+// --- Initialize F2P checkbox ---
+window.addEventListener("load", () => {
+    const f2pCheckbox = document.getElementById("f2pFilter");
+    if (f2pCheckbox) {
+        // Restore saved state
+        const saved = localStorage.getItem("f2pFilter") === "true";
+        f2pCheckbox.checked = saved;
+        applyF2PFilter(saved);
+
+        f2pCheckbox.addEventListener("change", () => {
+            applyF2PFilter(f2pCheckbox.checked);
+            localStorage.setItem("f2pFilter", f2pCheckbox.checked ? "true" : "false");
+        });
+    }
+});
+
 
 
 // --- Update Summaries ---
@@ -353,4 +372,3 @@ window.addEventListener("hashchange", () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }
 });
-
