@@ -129,6 +129,18 @@
     </section>
     </div>
   </main>
+<div class="button-row">
+    <div class="back-container">
+        <button id="backBtn" class="back-btn">← Back</button>
+    </div>
+    <div class="refresh-container">
+        <button class="refresh-btn" onclick="refreshData()">
+            <div class="refresh-dot"></div>
+            Refresh Data
+            <span class="refresh-time" id="refreshTime"></span>
+        </button>
+    </div>
+</div>
 
 
   <!-- Armor Summary with Loading Spinner -->
@@ -139,14 +151,6 @@
   </div>
 
   <!-- Detailed Armor Section -->
-<div class="refresh-container">
-    <button class="refresh-btn" onclick="refreshData()">
-        <div class="refresh-dot"></div>
-        Refresh Data
-        <span class="refresh-time" id="refreshTime"></span>
-    </button>
-</div>
-
   <div id="armorSection" class="container"></div>
  
 
