@@ -339,6 +339,28 @@ button:focus-visible, a:focus-visible {
   .set-details div {
     font-size: 0.8rem;
   }
+
+  /* --- Mobile summary table --- */
+  .summary-table {
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+    font-size: 0.75rem; /* smaller text */
+  }
+
+  .summary-table th,
+  .summary-table td {
+    padding: 6px 8px; /* tighter padding */
+  }
+
+  .summary-table thead {
+    display: table-header-group;
+  }
+
+  .summary-table tbody,
+  .summary-table tr {
+    display: table-row;
+  }
 }
 
 @media (max-width: 420px) {
