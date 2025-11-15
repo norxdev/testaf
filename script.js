@@ -415,3 +415,23 @@ window.addEventListener("hashchange", () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }
 });
+
+// Function to update back button visibility based on URL hash
+const backBtn = document.getElementById('backBtn');
+
+function updateBackButtonVisibility() {
+    if (window.location.hash) {
+        backBtn.style.display = 'inline-flex';
+    } else {
+        backBtn.style.display = 'none';
+    }
+}
+
+// Show/hide on page load and hash change
+window.addEventListener('DOMContentLoaded', updateBackButtonVisibility);
+window.addEventListener('hashchange', updateBackButtonVisibility);
+
+backBtn.addEventListener('click', () => {
+    window.location.hash = '';
+    updateBackButtonVisibility();
+});
