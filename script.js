@@ -364,6 +364,11 @@ async function fetchLatestPrices() {
         latestData = await res.json();
         updateArmorPrices();
         updateSummaryTableBody();
+
+        // Reapply F2P filter after prices are applied
+        const savedF2P = localStorage.getItem("f2pFilter") === "true";
+        applyF2PFilter(savedF2P);
+
         await fetchDailyVolumes();
     } catch(err) { console.warn("Failed to fetch latest prices", err); }
 }
@@ -421,10 +426,30 @@ window.addEventListener("load", async () => {
     await fetchItemMappingOnce();
     createArmorSections();
     initSummaryTable();
-    document.getElementById("armorSection").style.display = "none";
+    const armorSection = document.getElementById("armorSection");
+    armorSection.style.display = "none";
 
-    // Open hash if exists
-    if (window.location.hash) handleHashChange();
+    // Read saved F2P filter
+    const savedF2P = localStorage.getItem("f2pFilter") === "true";
 
+    const f2pCheckbox = document.getElementById("f2pFilter");
+    if (f2pCheckbox) {
+        f2pCheckbox.checked = savedF2P;
+        f2pCheckbox.addEventListener("change", function () {
+            applyF2PFilter(this.checked);
+            localStorage.setItem("f2pFilter", this.checked ? "true" : "false");
+        });
+    }
+
+    // Fetch latest prices and volumes
     await fetchLatestPrices();
+
+    // Apply F2P filter **after** prices update
+    applyF2PFilter(savedF2P);
+
+    // Handle hash **after** everything is populated
+    if (window.location.hash) {
+        handleHashChange();
+    }
 });
+
