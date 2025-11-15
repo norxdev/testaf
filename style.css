@@ -42,11 +42,12 @@ button:focus-visible, a:focus-visible {
 .main-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 16px;
+  padding: 40px 16px 5px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 
 /* --- Sticky Header --- */
 .sticky-header {
@@ -149,12 +150,12 @@ button:focus-visible, a:focus-visible {
   flex-shrink: 0;
 }
 
-.piece-icon,
-.set-icon-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
+/* Make set and piece icons fully show pointer */
+.set-icon-box,
+.piece-icon-box,
+.set-icon-box img,
+.piece-icon {
+    cursor: pointer;
 }
 
 
@@ -234,12 +235,46 @@ button:focus-visible, a:focus-visible {
 }
 
 .summary-table td.profit-positive {
-    color: var(--accent); /* green */
+  color: var(--accent); /* green */
 }
 
 .summary-table td.profit-negative {
-    color: #ff3d00; /* red */
+  color: #ff3d00; /* red */
 }
+
+/* --- Faint column dividers --- */
+.summary-table th,
+.summary-table td {
+    border-right: 1px solid rgba(255, 255, 255, 0.05); /* very faint */
+}
+
+/* Remove the right border from the last column */
+.summary-table th:last-child,
+.summary-table td:last-child {
+    border-right: none;
+}
+/* Center align table headers */
+.summary-table th {
+    text-align: center;
+}
+
+/* Right-align numeric columns in tbody for larger screens */
+.summary-table td:nth-child(2), /* Profit per set */
+.summary-table td:nth-child(3), /* ROI % */
+.summary-table td:nth-child(4)  /* Total Pieces Cost */
+{
+    text-align: right;
+}
+
+/* --- Mobile adjustments --- */
+@media (max-width: 500px) {
+    /* Center all table content on small screens */
+    .summary-table th,
+    .summary-table td {
+        text-align: center !important;
+    }
+}
+
 
 /* --- Full-screen armor view --- */
 #armorSection {
@@ -283,6 +318,104 @@ button:focus-visible, a:focus-visible {
   line-height: 1.5;
 }
 
+/* --- Bottom Summary Fonts --- */
+.set-bottom-summary .set-profit,
+.set-bottom-summary .set-roi {
+  font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+  font-weight: bold;
+  text-align: right;
+  margin-top: 16px;
+}
+
+/* --- Refresh Button Container --- */
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 8px 16px 0 16px;
+    box-sizing: border-box;
+}
+
+.back-container {
+    /* back button left aligned */
+}
+
+.back-btn {
+    display: none;
+    padding: 6px 12px;
+    font-weight: normal;
+    background-color: #555;
+    color: var(--text-light);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.back-btn.show {
+    display: inline-flex;
+}
+
+.refresh-container {
+    /* refresh button right aligned */
+}
+
+.refresh-btn {
+    padding: 8px 16px;
+    font-weight: normal;
+    background-color: #444;
+    color: var(--text-light);
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+
+
+/* --- Refresh Button with Indicator --- */
+.refresh-btn {
+    padding: 8px 16px;        /* keep nice size for button */
+    font-weight: normal;       /* not bold */
+    background-color: #444;    /* neutral gray */
+    color: var(--text-light);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;                  /* gap between dot and text */
+    font-size: 0.95rem;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.refresh-btn:hover {
+    transform: scale(1.03);
+}
+
+.refresh-btn:active {
+    transform: none;
+}
+
+/* The freshness dot inside the button */
+.refresh-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #888;  
+    flex-shrink: 0;
+    border: 1px solid #00000055; /* subtle outline */
+}
+
+/* Last refresh time text (subtle color) */
+.refresh-time {
+    font-size: 0.8rem;
+    color: #aaaaaa;
+}
+
+
 /* --- Responsive Adjustments --- */
 @media (max-width: 800px) {
   .set-info,
@@ -317,51 +450,37 @@ button:focus-visible, a:focus-visible {
   }
 }
 
+/* --- Mobile summary table without horizontal scroll --- */
 @media (max-width: 500px) {
-  .piece-card {
-    gap: 6px;
-  }
-
-  .piece-icon-box {
-    width: 32px;
-    height: 32px;
-  }
-
-  .set-icon-box {
-    width: 40px;
-    height: 40px;
-  }
-
-  .set-details h2 {
-    font-size: 0.85rem;
-  }
-
-  .set-details div {
-    font-size: 0.8rem;
-  }
-
-  /* --- Mobile summary table --- */
-  .summary-table {
-    display: block;
-    overflow-x: auto;
+  .summary-table-container {
     width: 100%;
-    font-size: 0.75rem; /* smaller text */
+    overflow-x: hidden; /* remove scroll */
+  }
+
+  .summary-table {
+    width: 100%;
+    table-layout: fixed; /* forces columns to fit container */
+    border-collapse: collapse;
+    font-size: 0.75rem; /* smaller for mobile */
   }
 
   .summary-table th,
   .summary-table td {
-    padding: 6px 8px; /* tighter padding */
+    padding: 6px 4px;
+    white-space: normal; /* allow text to wrap */
+    word-wrap: break-word; /* force long words to break */
+    text-align: left;
   }
 
-  .summary-table thead {
-    display: table-header-group;
+  .summary-table th {
+    font-size: 0.8rem;
   }
 
-  .summary-table tbody,
-  .summary-table tr {
-    display: table-row;
+  .summary-table td {
+    font-size: 0.75rem;
   }
 }
+
 
 @media (max-width: 420px) {
   .title-icon {
@@ -369,56 +488,10 @@ button:focus-visible, a:focus-visible {
   }
 }
 
-.set-bottom-summary .set-profit,
-.set-bottom-summary .set-roi {
-  font-size: clamp(1.3rem, 2.5vw, 1.6rem); /* larger and responsive */
-  font-weight: bold;
-  text-align: right;
-  margin-top: 16px; /* optional spacing above */
-}
-
-/* --- Refresh Button Container --- */
-.refresh-container {
-    padding: 16px 0 0 16px; /* top + left padding */
-}
-
-/* --- Refresh Button with Indicator --- */
-.refresh-btn {
-    padding: 8px 16px;        /* slightly smaller */
-    font-weight: normal;       /* not bold */
-    background-color: #444;    /* neutral gray */
-    color: var(--text-light);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;                 /* slightly smaller gap */
-    font-size: 0.95rem;       /* slightly smaller font */
-    transition: transform 0.2s, background-color 0.2s;
-}
-
-.refresh-btn:hover {
-    transform: scale(1.03);   /* smaller hover scale */
-}
-
-.refresh-btn:active {
-    transform: none;
-}
-
-/* The freshness dot inside the button */
-.refresh-dot {
-    width: 12px;              /* smaller */
-    height: 12px;
-    border-radius: 50%;
-    background-color: #888;    /* neutral until refreshed */
-    flex-shrink: 0;
-    border: 1px solid #00000055; /* subtle outline */
-}
-
-/* Last refresh time text (subtle color) */
-.refresh-time {
-    font-size: 0.8rem;
-    color: #aaaaaa;
+@media (max-width: 500px) {
+  .summary-table th,
+  .summary-table td {
+    border-right: 1px solid rgba(255, 255, 255, 0.02); /* even fainter */
+  }
 }
 
