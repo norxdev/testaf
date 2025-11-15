@@ -48,7 +48,6 @@ button:focus-visible, a:focus-visible {
   align-items: center;
 }
 
-
 /* --- Sticky Header --- */
 .sticky-header {
   position: sticky;
@@ -139,8 +138,8 @@ button:focus-visible, a:focus-visible {
 /* --- Image Boxes: Pieces & Sets Unified --- */
 .piece-icon-box,
 .set-icon-box {
-  width: clamp(48px, 8vw, 64px);   /* responsive width */
-  height: clamp(48px, 8vw, 64px);  /* responsive height */
+  width: clamp(48px, 8vw, 64px);
+  height: clamp(48px, 8vw, 64px);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -157,7 +156,6 @@ button:focus-visible, a:focus-visible {
 .piece-icon {
     cursor: pointer;
 }
-
 
 /* --- Piece / Set Info --- */
 .piece-info,
@@ -235,46 +233,43 @@ button:focus-visible, a:focus-visible {
 }
 
 .summary-table td.profit-positive {
-  color: var(--accent); /* green */
+  color: var(--accent);
 }
 
 .summary-table td.profit-negative {
-  color: #ff3d00; /* red */
+  color: #ff3d00;
 }
 
 /* --- Faint column dividers --- */
 .summary-table th,
 .summary-table td {
-    border-right: 1px solid rgba(255, 255, 255, 0.05); /* very faint */
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Remove the right border from the last column */
 .summary-table th:last-child,
 .summary-table td:last-child {
     border-right: none;
 }
+
 /* Center align table headers */
 .summary-table th {
     text-align: center;
 }
 
-/* Right-align numeric columns in tbody for larger screens */
-.summary-table td:nth-child(2), /* Profit per set */
-.summary-table td:nth-child(3), /* ROI % */
-.summary-table td:nth-child(4)  /* Total Pieces Cost */
-{
+/* Right-align numeric columns in tbody */
+.summary-table td:nth-child(2),
+.summary-table td:nth-child(3),
+.summary-table td:nth-child(4) {
     text-align: right;
 }
 
 /* --- Mobile adjustments --- */
 @media (max-width: 500px) {
-    /* Center all table content on small screens */
     .summary-table th,
     .summary-table td {
         text-align: center !important;
     }
 }
-
 
 /* --- Full-screen armor view --- */
 #armorSection {
@@ -337,9 +332,7 @@ button:focus-visible, a:focus-visible {
     box-sizing: border-box;
 }
 
-.back-container {
-    /* back button left aligned */
-}
+.back-container {}
 
 .back-btn {
     display: none;
@@ -356,9 +349,7 @@ button:focus-visible, a:focus-visible {
     display: inline-flex;
 }
 
-.refresh-container {
-    /* refresh button right aligned */
-}
+.refresh-container {}
 
 .refresh-btn {
     padding: 8px 16px;
@@ -373,24 +364,6 @@ button:focus-visible, a:focus-visible {
     cursor: pointer;
 }
 
-
-
-/* --- Refresh Button with Indicator --- */
-.refresh-btn {
-    padding: 8px 16px;        /* keep nice size for button */
-    font-weight: normal;       /* not bold */
-    background-color: #444;    /* neutral gray */
-    color: var(--text-light);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;                  /* gap between dot and text */
-    font-size: 0.95rem;
-    transition: transform 0.2s, background-color 0.2s;
-}
-
 .refresh-btn:hover {
     transform: scale(1.03);
 }
@@ -399,22 +372,19 @@ button:focus-visible, a:focus-visible {
     transform: none;
 }
 
-/* The freshness dot inside the button */
 .refresh-dot {
     width: 12px;
     height: 12px;
     border-radius: 50%;
     background-color: #888;  
     flex-shrink: 0;
-    border: 1px solid #00000055; /* subtle outline */
+    border: 1px solid #00000055;
 }
 
-/* Last refresh time text (subtle color) */
 .refresh-time {
     font-size: 0.8rem;
     color: #aaaaaa;
 }
-
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 800px) {
@@ -450,25 +420,25 @@ button:focus-visible, a:focus-visible {
   }
 }
 
-/* --- Mobile summary table without horizontal scroll --- */
+/* --- Mobile summary table adjustments --- */
 @media (max-width: 500px) {
   .summary-table-container {
     width: 100%;
-    overflow-x: hidden; /* remove scroll */
+    overflow-x: hidden;
   }
 
   .summary-table {
     width: 100%;
-    table-layout: fixed; /* forces columns to fit container */
+    table-layout: fixed;
     border-collapse: collapse;
-    font-size: 0.75rem; /* smaller for mobile */
+    font-size: 0.75rem;
   }
 
   .summary-table th,
   .summary-table td {
     padding: 6px 4px;
-    white-space: normal; /* allow text to wrap */
-    word-wrap: break-word; /* force long words to break */
+    white-space: normal;
+    word-wrap: break-word;
     text-align: left;
   }
 
@@ -481,7 +451,6 @@ button:focus-visible, a:focus-visible {
   }
 }
 
-
 @media (max-width: 420px) {
   .title-icon {
     display: none;
@@ -491,7 +460,31 @@ button:focus-visible, a:focus-visible {
 @media (max-width: 500px) {
   .summary-table th,
   .summary-table td {
-    border-right: 1px solid rgba(255, 255, 255, 0.02); /* even fainter */
+    border-right: 1px solid rgba(255, 255, 255, 0.02);
   }
 }
 
+/* --- Sorting arrows with reserved space --- */
+#armorSummaryTable th {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Always reserve space for the arrow */
+#armorSummaryTable th::after {
+    content: '';
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 6px solid transparent; /* invisible by default */
+}
+
+/* Active sort arrows */
+#armorSummaryTable th.sort-asc::after {
+    border-bottom-color: #00e676; /* up arrow */
+}
+
+#armorSummaryTable th.sort-desc::after {
+    border-top-color: #00e676; /* down arrow */
+}
