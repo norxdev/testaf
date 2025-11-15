@@ -1,4 +1,4 @@
-/* --- Variables for easy theme changes --- */
+/* --- Variables --- */
 :root {
   --bg-dark: #121212;
   --bg-darker: #1e1e1e;
@@ -77,29 +77,33 @@ button:focus-visible, a:focus-visible {
   flex-shrink: 0;
 }
 
-/* --- Donate Button (Restored Original Style) --- */
-.donate-btn-header {
+/* --- Buttons --- */
+.donate-btn-header,
+.feedback-btn {
   padding: clamp(6px, 1vw, 12px) clamp(12px, 2vw, 24px);
   background-color: var(--accent);
   color: var(--text-dark);
   font-weight: bold;
   border-radius: 25px;
   text-decoration: none;
-  transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
   display: inline-block;
 }
 
-.donate-btn-header:hover {
+.donate-btn-header:hover,
+.feedback-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 12px var(--accent);
 }
 
-.donate-btn-header:active {
+.donate-btn-header:active,
+.feedback-btn:active {
   transform: none;
   box-shadow: none;
 }
 
-/* --- Armor Sets Wrapper --- */
+/* --- Armor Set Wrapper --- */
 .set-wrapper {
   background: var(--bg-card);
   border: 1px solid var(--border-dark);
@@ -109,85 +113,15 @@ button:focus-visible, a:focus-visible {
   box-shadow: 0 4px 12px var(--shadow-dark);
   width: 100%;
   max-width: 800px;
+  box-sizing: border-box;
 }
 
-/* --- Set Info Section --- */
-.set-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 8px 12px;
-  background-color: var(--bg-darker);
-}
-
-.set-icon-box {
-  width: 48px;
-  height: 48px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  flex-shrink: 0;
-  background-color: var(--bg-card);
-}
-
-.set-icon-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-.set-details {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex-grow: 1;
-}
-
-.set-details h2 {
-  margin: 0;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--text-light);
-}
-
-.set-details div {
-  font-size: 0.85rem;
-  color: #aaa;
-}
-
-.set-sell-price {
-  margin-left: auto;
-  font-weight: bold;
-  font-size: 0.95rem;
-  text-align: right;
-}
-
-.set-profit,
-.set-roi {
-  color: #fff;
-  font-weight: bold;
-  font-size: 0.9rem;
-}
-
-/* --- Pieces List --- */
-.pieces-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-/* --- Piece Card --- */
-.piece-card {
+/* --- Cards: Pieces & Sets --- */
+.piece-card,
+.set-card {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -201,32 +135,41 @@ button:focus-visible, a:focus-visible {
   gap: 10px;
 }
 
-.piece-icon-box {
-  width: 48px;
-  height: 48px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+/* --- Image Boxes: Pieces & Sets Unified --- */
+.piece-icon-box,
+.set-icon-box {
+  width: clamp(48px, 8vw, 64px);   /* responsive width */
+  height: clamp(48px, 8vw, 64px);  /* responsive height */
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  border-radius: 6px;
   background-color: var(--bg-card);
+  flex-shrink: 0;
 }
 
-.piece-icon-box img {
+.piece-icon,
+.set-icon-box img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  display: block;
 }
 
-.piece-info {
+
+/* --- Piece / Set Info --- */
+.piece-info,
+.set-card .piece-info {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  gap: 4px;
 }
 
 .piece-name {
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 600;
 }
 
 .piece-volume {
@@ -235,18 +178,29 @@ button:focus-visible, a:focus-visible {
   margin-top: 2px;
 }
 
-.piece-price-buy {
-  font-size: 0.9rem;
-  text-align: right;
+.piece-price-buy,
+.set-profit,
+.set-roi {
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
   font-weight: bold;
+  text-align: right;
+  margin-top: 12px;
+}
+
+/* --- Pieces List --- */
+.pieces-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
 }
 
 /* --- Total Buy --- */
 .set-total-buy {
-    font-weight: bold;
-    margin-top: 12px; /* added spacing above */
-    margin-bottom: 12px; /* keep existing spacing below */
-    text-align: right;
+  font-weight: bold;
+  margin: 12px 0;
+  text-align: right;
 }
 
 /* --- Summary Table --- */
@@ -268,12 +222,6 @@ button:focus-visible, a:focus-visible {
   cursor: pointer;
 }
 
-.summary-table th .sort-indicator {
-  display: inline-block;
-  width: 1ch;
-  text-align: right;
-}
-
 .summary-table tr {
   background-color: var(--bg-darker);
   border-bottom: 1px solid var(--border-dark);
@@ -285,21 +233,60 @@ button:focus-visible, a:focus-visible {
   background-color: #333;
 }
 
-.summary-table td.profit-cell {
-  text-align: right;
+.summary-table td.profit-positive {
+    color: var(--accent); /* green */
 }
 
-.summary-table tr.profit-positive td.profit-cell {
-  color: var(--accent);
+.summary-table td.profit-negative {
+    color: #ff3d00; /* red */
 }
 
-.summary-table tr.profit-negative td.profit-cell {
-  color: #ff3d00;
+/* --- Full-screen armor view --- */
+#armorSection {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#armorSection .set-wrapper {
+  max-width: 100%;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#armorSection .pieces-list {
+  width: 100%;
+}
+
+/* --- Main Card --- */
+.main-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius);
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto 30px auto;
+  box-shadow: 0 4px 12px var(--shadow-dark);
+}
+
+.main-card h2 {
+  margin: 16px 0 12px;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+}
+
+.main-card p,
+.main-card li {
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  line-height: 1.5;
 }
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 800px) {
-  .set-info {
+  .set-info,
+  .set-card {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -314,10 +301,14 @@ button:focus-visible, a:focus-visible {
     padding: 6px;
   }
 
-  .piece-icon-box,
-  .set-icon-box {
+  .piece-icon-box {
     width: 36px;
     height: 36px;
+  }
+
+  .set-icon-box {
+    width: 48px;
+    height: 48px;
   }
 
   .piece-name,
@@ -331,10 +322,14 @@ button:focus-visible, a:focus-visible {
     gap: 6px;
   }
 
-  .piece-icon-box,
-  .set-icon-box {
+  .piece-icon-box {
     width: 32px;
     height: 32px;
+  }
+
+  .set-icon-box {
+    width: 40px;
+    height: 40px;
   }
 
   .set-details h2 {
@@ -352,102 +347,56 @@ button:focus-visible, a:focus-visible {
   }
 }
 
-
-/* Full-screen view for selected armor set */
-#armorSection {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 20px; /* left & right padding */
-    box-sizing: border-box;
+.set-bottom-summary .set-profit,
+.set-bottom-summary .set-roi {
+  font-size: clamp(1.3rem, 2.5vw, 1.6rem); /* larger and responsive */
+  font-weight: bold;
+  text-align: right;
+  margin-top: 16px; /* optional spacing above */
 }
 
-/* Remove internal left/right padding that creates extra offset */
-#armorSection .set-wrapper {
-    max-width: 100%;
-    width: 100%;
-    padding: 20px; /* internal padding for content */
-    box-sizing: border-box;
+/* --- Refresh Button Container --- */
+.refresh-container {
+    padding: 16px 0 0 16px; /* top + left padding */
 }
 
-/* Optional: make pieces list stretch fully */
-#armorSection .pieces-list {
-    width: 100%;
-}
-
-.set-card {
-    display: flex;
-    flex-direction: row;
-    gap: 16px; /* space between image and text */
-    align-items: flex-start; /* align top */
-    padding: 12px;
-    background-color: var(--bg-darker);
-    border-radius: var(--radius);
-    border: 1px solid var(--border-dark);
-}
-
-.set-card .piece-left {
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
-    width: 100%; /* full width to avoid extra space */
-}
-
-.set-card .piece-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 4px;
-    flex-grow: 1; /* use available space */
-}
-
-.piece-name {
-    font-size: clamp(1rem, 2vw, 1.3rem); /* scales with screen width */
-    font-weight: 600;
-}
-
-.piece-price-buy, .set-profit, .set-roi, .piece-volume {
-    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-}
-
-.main-card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-dark);
-    border-radius: var(--radius);
-    padding: 24px;
-    max-width: 900px;
-    margin: 0 auto 30px auto;
-    box-shadow: 0 4px 12px var(--shadow-dark);
-}
-
-.main-card h2 {
-    margin-top: 16px;
-    margin-bottom: 12px;
-    font-size: clamp(1.2rem, 2vw, 1.6rem);
-}
-
-.main-card p, .main-card li {
-    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
-    line-height: 1.5;
-}
-
-.feedback-btn {
-    padding: clamp(6px, 1vw, 12px) clamp(12px, 2vw, 24px);
-    background-color: var(--accent);
-    color: var(--text-dark);
-    font-weight: bold;
-    border-radius: 25px;
-    text-decoration: none;
+/* --- Refresh Button with Indicator --- */
+.refresh-btn {
+    padding: 8px 16px;        /* slightly smaller */
+    font-weight: normal;       /* not bold */
+    background-color: #444;    /* neutral gray */
+    color: var(--text-light);
     border: none;
+    border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.2s;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    gap: 8px;                 /* slightly smaller gap */
+    font-size: 0.95rem;       /* slightly smaller font */
+    transition: transform 0.2s, background-color 0.2s;
 }
 
-.feedback-btn:hover {
-    transform: scale(1.05);
+.refresh-btn:hover {
+    transform: scale(1.03);   /* smaller hover scale */
 }
 
-.feedback-btn:active {
+.refresh-btn:active {
     transform: none;
 }
+
+/* The freshness dot inside the button */
+.refresh-dot {
+    width: 12px;              /* smaller */
+    height: 12px;
+    border-radius: 50%;
+    background-color: #888;    /* neutral until refreshed */
+    flex-shrink: 0;
+    border: 1px solid #00000055; /* subtle outline */
+}
+
+/* Last refresh time text (subtle color) */
+.refresh-time {
+    font-size: 0.8rem;
+    color: #aaaaaa;
+}
+
